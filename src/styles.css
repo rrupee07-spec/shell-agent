@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Mono", ui-monospace, monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  --color-bg: #10130e;
+  --color-surface: #181c15;
+  --color-surface-2: #23281e;
+  --color-fg: #f3efe4;
+  --color-muted: #b7b1a2;
+  --color-line: #31382a;
+  --color-lime: #d6f25c;
+  --color-lime-ink: #17200a;
+  --color-heat: #ff6a45;
+  --color-heat-ink: #2a100c;
+
+  --shadow-border: 0 0 0 1px rgba(243, 239, 228, 0.08);
+  --shadow-border-strong: 0 0 0 1px rgba(214, 242, 92, 0.45);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-bottom: 7rem;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-mono);
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button,
+  label,
+  input {
+    scroll-margin-bottom: 7rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  input[type="range"] {
+    accent-color: var(--color-lime);
+    height: 1.75rem;
+    width: 100%;
+  }
+}
+
+@layer components {
+  .safe-top {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+
+  .nav-pad {
+    padding-bottom: max(0.65rem, env(safe-area-inset-bottom));
+  }
+
+  .card {
+    background: var(--color-surface);
+    box-shadow: var(--shadow-border);
+    border-radius: 1.25rem;
+  }
+
+  .tape-in {
+    animation: tape-in 180ms ease-out;
+  }
+
+  .pulse-dot {
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes tape-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tape-in,
+  .pulse-dot {
+    animation: none;
+  }
+}
